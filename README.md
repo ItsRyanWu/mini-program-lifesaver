@@ -1,6 +1,7 @@
 # miniprogram-lifesaver
 
 1. **CSS 变量 `env(safe-area-inset-bottom)` 的非常规表现**
+
 	在 Android 平台中，该变量并非不支持，而是为 0。这意味着你无法使用 `@supports (padding-bottom: env(safe-area-inset-bottom))` 这样的 CSS 特性检测功能以及 `env(safe-area-inset-bottom, 20px)` 这样的CSS 变量 fallback 功能。
 	为什么需要这些功能？ 有时你需要在 `env(safe-area-inset-bottom)` 值的基础上进行修改（比如 `env(safe-area-inset-bottom) - 10px` ）从而得出另一个 CSS 变量。可是在 Android 平台中该变量将无法避免的成为最终表现为 `-10px` 的变量，这将对 UI 的适配造成影响。CSS `max()` 或者 `min()` 仅支持 iOS 平台的兼容局限性也使得它在这个场景中无法发挥作用。
 
