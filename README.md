@@ -1,6 +1,13 @@
 # miniprogram-lifesaver
 
-1. **CSS 变量 `env(safe-area-inset-bottom)` 的非常规表现**
+1. **_iOS_ `<video/>` 同层渲染失败条件与监听处理**
+
+	众所周知小程序实际上是一种 hybrid app，无法避免的涉及到 native 组件与 web 组件在同一视口中的叠加渲染。理论上 native 组件在垂直于屏幕的图层优先级上肯定是要高于 web 组件，因为 webview 本身就处于 native 应用提供的容器里。有关小程序可以实现在 hybrid 应用中实现不同视图层组件的同层渲染的技术细节介绍很少，这篇 [来自官方社区的文章][1] 也仅能解答部分疑惑。总结于这篇文章中的有价值的内容主要是：
+
+	1. 尽量避免在支持同层渲染的原生组件上用 CSS 属性做影响文档结构的变化。
+	2. `bind:rendererror` 事件是唯一可以用来监听同层渲染失败的事件，你可以用这个事件来做亡羊补牢式的体验优化，即错误已经发生，如何最大程度挽回已经丢失的用户体验？从我的个人经验来说可以做两点：1. 向后台发送错误统计信息；2. 用且仅能用 `wx.showModal` 方法触发原生 modal 组件向用户解释目前到底发生了什么并且提供按钮引导用户 `relaunch` 到当前页面来试探此次同层渲染错误是否为偶然发生（实际上的确有偶然发生的情况）。
+
+2. **CSS 变量 `env(safe-area-inset-bottom)` 的非常规表现**
 
 	在 Android 平台中，该变量并非不支持，而是为 0。这意味着你无法使用 `@supports (padding-bottom: env(safe-area-inset-bottom))` 这样的 CSS 特性检测功能以及 `env(safe-area-inset-bottom, 20px)` 这样的CSS 变量 fallback 功能。
 
@@ -17,24 +24,25 @@ Todo:
 1. 根级滚动容器与 `<scroll-view/>` 的优劣对比
 2. _iOS_ `<scroll-view/>` 特定情况下卡死
 3. `<scroll-view/>` 自动滚动功能特定情况下偶现失效
-4. _iOS_ `<video/>` 同层渲染失败条件与监听处理
-   5. _Android_ 竖屏视频横向拉伸 (metadata width 属性错误)
-6. 使用 custom tabbar 时的性能差异、created 预先触发逻辑、维度数据获取
-7. 使用纯 CSS 逻辑来计算与给页面制造 custom tabbar 的预留空间以及相比之下使用 `getboundingClientRect` API 的劣势
-8. `<input/>` 激活时滚动试图 placeholder 偏移
-9. `<input/>` autofocus 功能在页面初始加载之后偶现失效
-10. _iOS_ `<input/>` 激活时特殊情况下内部区域可滚动
-11. `wx.onKeyboardHeightChange` 在键盘收起时不触发
-12. `styleIsolation: shared` 时 `externalClasses` 属性无效
-13. _Android_ 数字键盘触发唤起系统原生键盘导致键盘重叠
-14. `virtualHost: true` 时组件不保留实例
-15. `this.animate` 单独动画某些属性无效（如 `background-color`）
-16. `font-family` 不全导致中英文混杂时的字重异常
-17. 动态的阻止事件冒泡与默认行为
-18. _Android_ 三星 Samsung 机型 `windowHeight` 异常
-19. _iOS_ Flexbox 部分表现反常
-20. `<image/>` `widthFix` 与 `heightFix` 模式性能较差，或导致图片拉伸闪烁
-21. _iOS_ 在 `<page-meta/>` 中动态改变 `<navigation-bar/>` 的 `front-color` 属性在 iOS 7.0.15 以及之后的版本中不生效
-22. Video 组件自动横屏导致在安卓上该页面横屏
-23. iOS 14 Video 组件可被 overflow 滚动
-24. CSS pointer-events: none 作用于安卓端的原生组件无效
+   4. _Android_ 竖屏视频横向拉伸 (metadata width 属性错误)
+5. 使用 custom tabbar 时的性能差异、created 预先触发逻辑、维度数据获取
+6. 使用纯 CSS 逻辑来计算与给页面制造 custom tabbar 的预留空间以及相比之下使用 `getboundingClientRect` API 的劣势
+7. `<input/>` 激活时滚动试图 placeholder 偏移
+8. `<input/>` autofocus 功能在页面初始加载之后偶现失效
+9. _iOS_ `<input/>` 激活时特殊情况下内部区域可滚动
+10. `wx.onKeyboardHeightChange` 在键盘收起时不触发
+11. `styleIsolation: shared` 时 `externalClasses` 属性无效
+12. _Android_ 数字键盘触发唤起系统原生键盘导致键盘重叠
+13. `virtualHost: true` 时组件不保留实例
+14. `this.animate` 单独动画某些属性无效（如 `background-color`）
+15. `font-family` 不全导致中英文混杂时的字重异常
+16. 动态的阻止事件冒泡与默认行为
+17. _Android_ 三星 Samsung 机型 `windowHeight` 异常
+18. _iOS_ Flexbox 部分表现反常
+19. `<image/>` `widthFix` 与 `heightFix` 模式性能较差，或导致图片拉伸闪烁
+20. _iOS_ 在 `<page-meta/>` 中动态改变 `<navigation-bar/>` 的 `front-color` 属性在 iOS 7.0.15 以及之后的版本中不生效
+21. Video 组件自动横屏导致在安卓上该页面横屏
+22. iOS 14 Video 组件可被 overflow 滚动
+23. CSS pointer-events: none 作用于安卓端的原生组件无效
+
+[1]:	https://developers.weixin.qq.com/community/develop/article/doc/000c4e433707c072c1793e56f5c813
