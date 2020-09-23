@@ -36,6 +36,14 @@
 
 	小程序对于组件样式的管理策略原本是一个不与外界产生任何作用的孤岛，但在自定义组件的 JSON 配置中声明 `styleIsolation: shared` 或者 `styleIsolation: apply-shared` 会对该组件以及外界的 CSS 作用域产生不同的影响。而仅当你使用 `shared` 去开启一个自定义组件最大程度的样式作用域时 `externalClasses` 所起到的自定义外部 class 名的作用是无效的。
 
+
+5. `<image/>` 开启 `widthFix` 或 `heightFix` 模式时，尺寸样式自动计算的响应速度差强人意
+
+	可以看得出来 `widthFix` 与 `heightFix` 是小程序团队从提升开发体验角度设计的 API，而且这种特性相较于 `object-fit: contain` 式的特性的确存在专门属于它的应用场景。
+
+	但现实是前者的实现方式其实就是在当图片在渲染完成后，根据其中一个已经被设置为固定维度的尺寸数据以及 metadata 中的原始比例数据来自动计算出另一个维度的数据并将该数据设置到 style 属性中。这整个过程从开始到应用结束是有肉眼可见的延迟的，并且在糟糕的场景中该延迟会导致文档进行布局重排，页面内被影响到的元素会出现位置闪烁，而图片组件本身会出现尺寸从被拉伸到比例正常的尺寸闪烁。解决方案就是仍然使用 `aspectFit` 作为实现图片尺寸自适应的方法，只不过开发者需要预先根据图片的原始比例给图片的容器赋予合理的比例以使其能够更好地利用展示面积。
+
+
 Todo:
 
 1. 根级滚动容器与 `<scroll-view/>` 的优劣对比
@@ -54,10 +62,10 @@ Todo:
 14. 动态的阻止事件冒泡与默认行为
 15. _Android_ 三星 Samsung 机型 `windowHeight` 异常
 16. _iOS_ Flexbox 部分表现反常
-17. `<image/>` `widthFix` 与 `heightFix` 模式性能较差，或导致图片拉伸闪烁
-18. _iOS_ 在 `<page-meta/>` 中动态改变 `<navigation-bar/>` 的 `front-color` 属性在 iOS 7.0.15 以及之后的版本中不生效
-19. Video 组件自动横屏导致在安卓上该页面横屏
-20. iOS 14 Video 组件可被 overflow 滚动
-21. CSS pointer-events: none 作用于安卓端的原生组件无效
+17. _iOS_ 在 `<page-meta/>` 中动态改变 `<navigation-bar/>` 的 `front-color` 属性在 iOS 7.0.15 以及之后的版本中不生效
+18. Video 组件自动横屏导致在安卓上该页面横屏
+19. iOS 14 Video 组件可被 overflow 滚动
+20. CSS pointer-events: none 作用于安卓端的原生组件无效
+21. 中文段落 font-family 包含英文字体会导致文字行盒有底部 padding
 
 [1]:	https://developers.weixin.qq.com/community/develop/article/doc/000c4e433707c072c1793e56f5c813
