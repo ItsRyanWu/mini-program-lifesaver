@@ -57,6 +57,13 @@
 
 在小程序中为内容段落实现自定义英文字体样式时，该段落整体的 line box 高度会微妙的增加一点，文字在 line box 中布局偏上，导致你永远无法“自然”的将该行文字进行垂直居中。
 
+
+### 10. `<input/>` 的 `focus` 属性设置为 `true` 在页面初始挂载时有几率失效
+
+小程序官方文档废弃了 `<input/>` 组件的 `auto-focus` 属性转而建议通过将 `focus` 属性固定设置为 `true` 的方式来实现文本框自动聚焦，但该 API 在页面初始挂载后有一定几率起不到自动聚焦的作用，也就是在页面渲染完成后键盘没有自动弹出。
+
+建议在页面的 `show` 生命周期钩子函数中设置一个不小于 500ms 延迟的定时器来使 `focus` 在页面渲染完成的一段时间后被设置为 `true` 来解决这个不稳定 BUG。
+
 ---- 
 
 Todo:
@@ -68,17 +75,17 @@ Todo:
 5. 使用 custom tabbar 时的性能差异、created 预先触发逻辑、维度数据获取
 6. 使用纯 CSS 逻辑来计算与给页面制造 custom tabbar 的预留空间以及相比之下使用 `getboundingClientRect` API 的劣势
 7. `<input/>` 激活时滚动试图 placeholder 偏移
-8. `<input/>` autofocus 功能在页面初始加载之后偶现失效
-9. _iOS_ `<input/>` 激活时特殊情况下内部区域可滚动
-10. `wx.onKeyboardHeightChange` 在键盘收起时不触发
-11. _Android_ 数字键盘触发唤起系统原生键盘导致键盘重叠
-12. `this.animate` 单独动画某些属性无效（如 `background-color`）
-13. _Android_ 三星 Samsung 机型 `windowHeight` 异常
-14. _iOS_ Flexbox 部分表现反常
-15. _iOS_ 在 `<page-meta/>` 中动态改变 `<navigation-bar/>` 的 `front-color` 属性在 iOS 7.0.15 以及之后的版本中不生效
-16. Video 组件自动横屏导致在安卓上该页面横屏
-17. iOS 14 Video 组件可被 overflow 滚动
-18. CSS pointer-events: none 作用于安卓端的原生组件无效
+8. _iOS_ `<input/>` 激活时特殊情况下内部区域可滚动
+9. `wx.onKeyboardHeightChange` 在键盘收起时不触发
+10. _Android_ 数字键盘触发唤起系统原生键盘导致键盘重叠
+11. `this.animate` 单独动画某些属性无效（如 `background-color`）
+12. _Android_ 三星 Samsung 机型 `windowHeight` 异常
+13. _iOS_ Flexbox 部分表现反常
+14. _iOS_ 在 `<page-meta/>` 中动态改变 `<navigation-bar/>` 的 `front-color` 属性在 iOS 7.0.15 以及之后的版本中不生效
+15. Video 组件自动横屏导致在安卓上该页面横屏
+16. iOS 14 Video 组件可被 overflow 滚动
+17. CSS pointer-events: none 作用于安卓端的原生组件无效
+18. _Android_ 当前小程序在从另一个小程序跳转回来后 autoplay 的 Video 停止播放
 
 [1]:	https://developers.weixin.qq.com/miniprogram/dev/framework/view/interactive-animation.html#%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88
 [2]:	https://developers.weixin.qq.com/community/develop/article/doc/000c4e433707c072c1793e56f5c813
