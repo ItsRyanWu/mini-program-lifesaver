@@ -86,6 +86,8 @@ Todo:
 16. iOS 14 Video 组件可被 overflow 滚动
 17. CSS pointer-events: none 作用于安卓端的原生组件无效
 18. _Android_ 当前小程序在从另一个小程序跳转回来后 autoplay 的 Video 停止播放
+19. `<Swiper/>` 设置 `display-multiple-items` 值后若 `current` 值使其超出滚动范围则 `<SwiperItem/>` 会全部消失
+20. 自定义组件内将 `<slot/>` 放置于 `<text/>` 内时视图无法更新
 
 [1]:	https://developers.weixin.qq.com/miniprogram/dev/framework/view/interactive-animation.html#%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88
 [2]:	https://developers.weixin.qq.com/community/develop/article/doc/000c4e433707c072c1793e56f5c813
