@@ -107,6 +107,7 @@ Todo:
 19. 自定义组件内将 `<slot/>` 放置于 `<text/>` 内时视图无法更新
 20.  同一页面内若 `<video/>` 组件超过 3 个则有 1 个 `<video/>` 在 iOS 上无法加载无法播放
 21. `<video/>` 在 iOS 上且 autoplay + loop 模式下只能触发一次 play 事件和无数次 ended 事件
+22. _iOS_ Data 字段中未初始化设置视图需要的变量可能会导致该组件视图渲染失败进而导致在其之后的节点渲染全部失败，页面白屏。
 
 [1]:	https://developers.weixin.qq.com/miniprogram/dev/framework/view/interactive-animation.html#%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88
 [2]:	https://developers.weixin.qq.com/community/develop/article/doc/000c4e433707c072c1793e56f5c813
