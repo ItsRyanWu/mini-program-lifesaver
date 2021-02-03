@@ -109,6 +109,7 @@ Todo:
 21. `<video/>` 在 iOS 上且 autoplay + loop 模式下只能触发一次 play 事件和无数次 ended 事件
 22. _iOS_ Data 字段中未初始化设置视图需要的变量可能会导致该组件视图渲染失败进而导致在其之后的节点渲染全部失败，页面白屏。
 23. `<picker-view/>` 单击当前选中项会触发 `pickStart` 事件但紧接着并不会触发 `pickEnd` 事件
+24. `<picker-view/>`, `<scroll-view/>` 等 hybrid 类型组件应该避免使用 CSS Flexbox 弹性的控制其尺寸，否则在某些边界情况下当小程序渲染此类组件时可能会出现其尺寸不符合预期但又难以用 Web 的知识与经验去 debug 的情况。
 
 [1]:	https://developers.weixin.qq.com/miniprogram/dev/framework/view/interactive-animation.html#%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88
 [2]:	https://developers.weixin.qq.com/community/develop/article/doc/000c4e433707c072c1793e56f5c813
