@@ -82,6 +82,11 @@
 小程序组件的双向数据绑定不支持非原始值类型的数据，主要原因是小程序组件内部逻辑不支持对引用数据类型的深度对比来终止数据流的循环所以会导致无限循环内存溢出。如想要实现引用数据类型的双向数据绑定可以采用最基本的父组件向下传参 + 子组件向上发布事件的方式。
 
 
+### 13. _Mac_ 自定义 Tabbar 在切换页面时消失
+
+macOS 下的小程序自定义 Tabbar 在切换页面时并不会为下一个页面挂载渲染实例，导致仅有首个 Tabbar 页面会有 Tabbar 而其他页面却没有。[官方已确认此 BUG][3]
+
+
 ---- 
 
 Todo:
@@ -113,3 +118,4 @@ Todo:
 
 [1]:	https://developers.weixin.qq.com/miniprogram/dev/framework/view/interactive-animation.html#%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88
 [2]:	https://developers.weixin.qq.com/community/develop/article/doc/000c4e433707c072c1793e56f5c813
+[3]:    https://developers.weixin.qq.com/community/develop/doc/0002008ca3039864d68b9425c56400
