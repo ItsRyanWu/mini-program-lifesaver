@@ -99,7 +99,7 @@ macOS 下的小程序自定义 Tabbar 在切换页面时并不会为下一个页
 
 ### 16. _iOS_ `<video/>` 事件触发不对等
 
-在 iOS 中当 `<video/>` 开启 `autoplay` 和 `loop` 两个选项时会只触发一次 play 事件和无数次 ended 事件。
+在 iOS 中当 `<video/>` 开启 `autoplay` 和 `loop` 两个选项时会只触发一次 `play` 事件和无数次 `ended` 事件。
 
 
 ### 17. `<picker-view/>` 事件触发不对等
