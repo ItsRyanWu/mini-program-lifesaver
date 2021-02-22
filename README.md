@@ -92,6 +92,21 @@ macOS 下的小程序自定义 Tabbar 在切换页面时并不会为下一个页
 `<picker-view/>`, `<scroll-view/>` 等微信封装的组件应该避免使用 CSS Flexbox 弹性的控制其尺寸。否则在某些边界情况下，小程序在渲染此类组件时可能会出现该类型组件尺寸不符合预期、布局错乱的情况。但此时又难以用 Web 的知识与经验去解释以及 debug。
 
 
+### 15. _iOS_ 同一页面内 `<video/>` 组件数量上限
+
+在 iOS 中若同一页面内有超过 3 个 `<video/>` 则存在其中个别 `<video/>` 无法加载播放的 BUG。规避方法为将 `<video/>` 数量限制在 3 个以内。
+
+
+### 16. _iOS_ `<video/>` 事件触发不对等
+
+在 iOS 中当 `<video/>` 开启 `autoplay` 和 `loop` 两个选项时会只触发一次 play 事件和无数次 ended 事件。
+
+
+### 17. `<picker-view/>` 事件触发不对等
+
+在 `<picker-view/>` 中单击当前选中项会触发 `pickStart` 事件但紧接着并不会触发 `pickEnd` 事件。此 BUG 产生的原因或许是 `pickStart` 事件由 `touchStart` 一个交互事件即可触发而 `pickEnd` 则必须在当前选中项发生变动后触发。规避方法为在 `<picker-view/>` 上绑定 `tap` 事件来有条件的模拟 `pickEnd` 事件。
+
+
 
 
 ---- 
@@ -110,17 +125,15 @@ Todo:
 10. `this.animate` 单独动画某些属性无效（如 `background-color`）
 11. _Android_ 三星 Samsung 机型 `windowHeight` 异常
 12. _iOS_ Flexbox 部分表现反常
-13. _iOS_ 在 `<page-meta/>` 中动态改变 `<navigation-bar/>` 的 `front-color` 属性在 iOS 7.0.15 以及之后的版本中不生效
-14. Video 组件自动横屏导致在安卓上该页面横屏
-15. iOS 14 Video 组件可被 overflow 滚动
-16. CSS pointer-events: none 作用于安卓端的原生组件无效
-17. _Android_ 当前小程序在从另一个小程序跳转回来后 autoplay 的 Video 停止播放
-18. `<Swiper/>` 设置 `display-multiple-items` 值后若 `current` 值使其超出滚动范围则 `<SwiperItem/>` 会全部消失
-19. 自定义组件内将 `<slot/>` 放置于 `<text/>` 内时视图无法更新
-20.  同一页面内若 `<video/>` 组件超过 3 个则有 1 个 `<video/>` 在 iOS 上无法加载无法播放
-21. `<video/>` 在 iOS 上且 autoplay + loop 模式下只能触发一次 play 事件和无数次 ended 事件
-22. _iOS_ Data 字段中未初始化设置视图需要的变量可能会导致该组件视图渲染失败进而导致在其之后的节点渲染全部失败，页面白屏。
-23. `<picker-view/>` 单击当前选中项会触发 `pickStart` 事件但紧接着并不会触发 `pickEnd` 事件
+13. Video 组件自动横屏导致在安卓上该页面横屏
+14. iOS 14 Video 组件可被 overflow 滚动
+15. CSS pointer-events: none 作用于安卓端的原生组件无效
+16. _Android_ 当前小程序在从另一个小程序跳转回来后 autoplay 的 Video 停止播放
+17. `<Swiper/>` 设置 `display-multiple-items` 值后若 `current` 值使其超出滚动范围则 `<SwiperItem/>` 会全部消失
+18. 自定义组件内将 `<slot/>` 放置于 `<text/>` 内时视图无法更新
+19. _iOS_ Data 字段中未初始化设置视图需要的变量可能会导致该组件视图渲染失败进而导致在其之后的节点渲染全部失败，页面白屏。
+
+
 
 [1]:	https://developers.weixin.qq.com/miniprogram/dev/framework/view/interactive-animation.html#%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88
 [2]:	https://developers.weixin.qq.com/community/develop/article/doc/000c4e433707c072c1793e56f5c813
