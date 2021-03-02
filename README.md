@@ -102,6 +102,11 @@ macOS 下的小程序自定义 Tabbar 在切换页面时并不会为下一个页
 在 `<picker-view/>` 中单击当前选中项会触发 `pickStart` 事件但紧接着并不会触发 `pickEnd` 事件。此 BUG 产生的原因或许是 `pickStart` 事件由 `touchStart` 一个交互事件即可触发而 `pickEnd` 则必须在当前选中项发生变动后触发。规避方法为在 `<picker-view/>` 上绑定 `tap` 事件来有条件的模拟 `pickEnd` 事件。
 
 
+### 17. 自定义组件内 `<text/>` 的 slot 无法为其内部组件提供视图更新能力
+
+在自定义组件内若将 `<slot/>` 放置于 `<text/>` 节点内则无法使 slot 内部的组件在 runtime 进行基于状态数据变化的视图更新。
+
+
 
 
 ---- 
@@ -125,8 +130,7 @@ Todo:
 15. CSS pointer-events: none 作用于安卓端的原生组件无效
 16. _Android_ 当前小程序在从另一个小程序跳转回来后 autoplay 的 Video 停止播放
 17. `<Swiper/>` 设置 `display-multiple-items` 值后若 `current` 值使其超出滚动范围则 `<SwiperItem/>` 会全部消失
-18. 自定义组件内将 `<slot/>` 放置于 `<text/>` 内时视图无法更新
-19. _iOS_ Data 字段中未初始化设置视图需要的变量可能会导致该组件视图渲染失败进而导致在其之后的节点渲染全部失败，页面白屏。
+18. _iOS_ Data 字段中未初始化设置视图需要的变量可能会导致该组件视图渲染失败进而导致在其之后的节点渲染全部失败，页面白屏。
 
 
 
