@@ -99,7 +99,7 @@ macOS 下的小程序自定义 Tabbar 在切换页面时并不会为下一个页
 
 ### ~~16. `<picker-view/>` 事件触发不对等~~
 
-在 `<picker-view/>` 中单击当前选中项会触发 `pickStart` 事件但紧接着并不会触发 `pickEnd` 事件。此 BUG 产生的原因或许是 `pickStart` 事件由 `touchStart` 一个交互事件即可触发而 `pickEnd` 则必须在当前选中项发生变动后触发。规避方法为在 `<picker-view/>` 上绑定 `tap` 事件来有条件的模拟 `pickEnd` 事件。
+~~在 `<picker-view/>` 中单击当前选中项会触发 `pickStart` 事件但紧接着并不会触发 `pickEnd` 事件。此 BUG 产生的原因或许是 `pickStart` 事件由 `touchStart` 一个交互事件即可触发而 `pickEnd` 则必须在当前选中项发生变动后触发。规避方法为在 `<picker-view/>` 上绑定 `tap` 事件来有条件的模拟 `pickEnd` 事件。~~
 
 
 ### 17. 自定义组件内 `<text/>` 的 slot 无法为其内部组件提供视图更新能力
