@@ -106,6 +106,10 @@ macOS 下的小程序自定义 Tabbar 在切换页面时并不会为下一个页
 
 在自定义组件内若将 `<slot/>` 放置于 `<text/>` 节点内则无法使 slot 内部的组件在 runtime 进行基于状态数据变化的视图更新。
 
+### 18. _iOS_ Flexbox 部分表现反常
+
+假设根容器 A 为 `display: flex` 且 `flex-direction: column`, 父容器 B 为 `flex: auto` 表示其高度完全由根容器 A 的剩余空间弹性计算，而此时若最内部的子容器 C 的高度为 100%，在 iOS 上以上这种情况下 C 高度将为 0，在 Android 上 C 的高度为理想中的父容器 A 高度的 100% 。
+
 
 
 
@@ -124,13 +128,12 @@ Todo:
 9. _Android_ 数字键盘触发唤起系统原生键盘导致键盘重叠
 10. `this.animate` 单独动画某些属性无效（如 `background-color`）
 11. _Android_ 三星 Samsung 机型 `windowHeight` 异常
-12. _iOS_ Flexbox 部分表现反常
-13. Video 组件自动横屏导致在安卓上该页面横屏
-14. iOS 14 Video 组件可被 overflow 滚动
-15. CSS pointer-events: none 作用于安卓端的原生组件无效
-16. _Android_ 当前小程序在从另一个小程序跳转回来后 autoplay 的 Video 停止播放
-17. `<Swiper/>` 设置 `display-multiple-items` 值后若 `current` 值使其超出滚动范围则 `<SwiperItem/>` 会全部消失
-18. _iOS_ Data 字段中未初始化设置视图需要的变量可能会导致该组件视图渲染失败进而导致在其之后的节点渲染全部失败，页面白屏。
+12. Video 组件自动横屏导致在安卓上该页面横屏
+13. iOS 14 Video 组件可被 overflow 滚动
+14. CSS pointer-events: none 作用于安卓端的原生组件无效
+15. _Android_ 当前小程序在从另一个小程序跳转回来后 autoplay 的 Video 停止播放
+16. `<Swiper/>` 设置 `display-multiple-items` 值后若 `current` 值使其超出滚动范围则 `<SwiperItem/>` 会全部消失
+17. _iOS_ Data 字段中未初始化设置视图需要的变量可能会导致该组件视图渲染失败进而导致在其之后的节点渲染全部失败，页面白屏。
 
 
 
