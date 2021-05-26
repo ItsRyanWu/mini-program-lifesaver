@@ -31,7 +31,7 @@
 
 在 Android 平台中，该变量并非不支持，而是为 0。这意味着你无法使用 `@supports (padding-bottom: env(safe-area-inset-bottom))` 这样的 CSS 特性检测功能以及 `env(safe-area-inset-bottom, 20px)` 这样的CSS 变量 fallback 功能。
 
-为什么需要这些功能？有时你需要在 `env(safe-area-inset-bottom)` 值的基础上进行修改从而得出另一个 CSS 变量，比如 `env(safe-area-inset-bottom) - 10px` 。可是在 Android 平台中该变量将无法避免的成为最终表现为 `-10px` 的变量，这将对 UI 的适配造成负面的影响。CSS `max()` 或者 `min()` 仅支持 iOS 平台的兼容局限性也使得它在这个场景中无法发挥作用。针对这个问题，我的解决方案是用 `min-height` CSS 属性来防止以上例子中的 `-10px` 对垂直方向上的布局造成负面影响，但应用的场景非常有限。
+为什么需要这些功能？有时你需要在 `env(safe-area-inset-bottom)` 值的基础上进行修改从而得出另一个 CSS 变量，比如 `env(safe-area-inset-bottom) - 10px` 。可是在 Android 平台中该变量将无法避免的成为最终表现为 `-10px` 的变量，这将对 UI 的适配造成负面的影响。CSS `max()` 或者 `min()` 仅支持 iOS 平台的兼容局限性也使得它在这个场景中无法发挥作用。针对这个问题，我的解决方案是用 `min-height` CSS 属性来防止以上例子中的 `-10px` 对垂直方向上的布局造成负面影响，但应用的场景非常有限。另外，还可以巧用 `Padding` 属性对于负值会将其限制为最小值 0 这一特性来做灵活应用，
 
 
 ### 5. _iOS_ CSS `transition-delay` 偶现闪烁
